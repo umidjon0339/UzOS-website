@@ -1,0 +1,65 @@
+# Manba koddan yigʻish
+
+UzOS’ni oʻzingiz yigʻish taxminan bir daqiqa oladi. Sizga Linux (yoki Windows’da WSL2) kerak.
+
+## 1. Vositalarni oʻrnating
+
+| Vosita | Vazifasi |
+| --- | --- |
+| `make` | Yigʻishni boshqaradi |
+| 32-bit qoʻllab-quvvatlovchi `gcc` | C kodini kompilyatsiya qiladi (`-m32`) |
+| `nasm` | `.s` fayllarni assemblerlaydi |
+| `grub-mkrescue`, `xorriso`, `mtools` | Yuklanadigan ISO yaratadi |
+| `qemu-system-i386` | Natijani ishga tushiradi |
+
+**Ubuntu / Debian**
+
+```
+sudo apt install build-essential gcc-multilib nasm grub-pc-bin grub-common xorriso mtools qemu-system-x86
+```
+
+**Arch / Manjaro**
+
+```
+sudo pacman -S base-devel nasm grub libisoburn mtools qemu-system-x86
+```
+
+## 2. Kodni oling
+
+```
+git clone https://github.com/umidjon0339/UzOS.git
+cd UzOS
+```
+
+## 3. Yigʻing va ishga tushiring
+
+```
+make          # kernel.bin ni yigʻish
+make run      # uni QEMU’da ishga tushirish
+```
+
+## Barcha make buyruqlari
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `make` | `kernel.bin` ni yigʻish |
+| `make run` | `kernel.bin` ni QEMU’da ishga tushirish |
+| `make iso` | Yuklanadigan `UzOS.iso` ni yaratish (VirtualBox yoki USB uchun) |
+| `make check` | Yadroda toʻgʻri Multiboot sarlavhasi borligini tekshirish |
+| `make clean` | Yigʻish yaratgan hamma narsani oʻchirish |
+
+## Nima qayerda
+
+```
+boot/      birinchi koʻrsatmalar, GRUB sozlamasi, linker skripti
+arch/      x86 xususiyatlari: GDT, IDT, TSS, uzilishlar, foydalanuvchi rejimiga oʻtish
+lib/       kichik yordamchilar: satrlar, formatlash, argumentlarni tahlil qilish
+modules/   yadroning oʻzi, har bir boshqaruv uchun bitta papka
+userland/  foydalanuvchi rejimida ishlaydigan namuna dastur (hello.c)
+```
+
+Har bir modul bir xil tuzilishga ega: yadro chaqiradigan qismlar uchun `core/`, har bir buyruq uchun bitta papkali `commands/`, har bir tizim chaqiruvi uchun bitta papkali `syscalls/` va hujum-himoya juftliklari uchun `security/`. [UzOS qanday tuzilgan](/uz/docs/modules) sahifasiga qarang.
+
+<Callout type="tip">
+Obyekt fayllar manba daraxtini takrorlagan holda `build/` ga tushadi, shuning uchun manba papkalarida faqat kod boʻladi. Sarlavha fayllar oʻzgarsa, qayta yigʻish avtomatik boshlanadi.
+</Callout>

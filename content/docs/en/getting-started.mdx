@@ -1,0 +1,68 @@
+# First boot
+
+This page shows what you will see when UzOS starts, and what to type first. If you have not started it yet, follow [Run in QEMU](/en/docs/install/qemu) first.
+
+## 1. The boot
+
+1. **GRUB** shows a menu with one entry, *UzOS*. After 3 seconds it starts by itself (or press Enter).
+2. The kernel prints its **boot log**: one `[ OK ]` line per part (timer, keyboard, memory, paging, users, scheduler...).
+3. The **login prompt** appears: `uzos login:`
+
+## 2. Log in
+
+UzOS has two accounts:
+
+| User | Password | What it can do |
+| --- | --- | --- |
+| `root` | `uzos` | Everything (all capabilities) |
+| `guest` | `guest` | Ordinary user: only its own files and processes |
+
+Type the user name, press Enter, then type the password. The prompt shows who you are and where you are: `root@uzos:~#` for root, `guest@uzos:~$` for a normal user.
+
+## 3. The first commands
+
+```
+help              list every command
+help ls           help for one command
+uzfetch           a summary of the system next to the flag
+ls /              the files in the root directory
+cat /proc/cpuinfo what the CPU is, written by the kernel
+ps                the running processes
+meminfo           how much RAM is used and free
+top               a live view of the CPU (q or Ctrl+C to quit)
+```
+
+## 4. Keys worth knowing
+
+| Key | What it does |
+| --- | --- |
+| `Tab` | Complete a command or a path |
+| `Up` / `Down` | Go through the commands you typed before |
+| `Ctrl+C` | Clear the line, or stop the running command |
+| Mouse wheel | Scroll back through the console |
+| `Ctrl+Up` / `Ctrl+Down` | Make the screen resolution bigger / smaller |
+
+While you type, the command name turns **green** if it exists and **red** if no command starts like that.
+
+## 5. The desktop
+
+```
+startx
+```
+
+`startx` opens a small graphical desktop with a *System Monitor* window. Drag windows by their title bar, click one to bring it to the front. Press **ESC** to go back to the shell.
+
+## 6. Users
+
+```
+whoami            who am I?
+su guest          become guest (password: guest)
+logout            back to the login prompt
+passwd            change your password
+```
+
+<Callout type="note">
+UzOS keeps its files in a **RAM disk**. Everything you create is lost when the machine is turned off. To leave, just close the virtual machine window.
+</Callout>
+
+Next, have a look at [all shell commands](/en/docs/commands) or try the [security lab](/en/docs/security-lab).

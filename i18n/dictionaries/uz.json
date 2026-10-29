@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "title": "UzOS — oʻrganish uchun operatsion tizim",
+    "description": "UzOS — kodini oʻqib oʻrganish uchun yozilgan kichik 32-bitli x86 operatsion tizimi. ISO faylni yuklab oling, QEMU yoki VirtualBox’da ishga tushiring va xotira, jarayonlar hamda xavfsizlik qanday ishlashini oʻz koʻzingiz bilan koʻring."
+  },
+  "nav": {
+    "home": "Bosh sahifa",
+    "download": "Yuklab olish",
+    "docs": "Qoʻllanma",
+    "github": "GitHub",
+    "menu": "Menyu",
+    "language": "Til",
+    "theme": "Tungi rejimni yoqish yoki oʻchirish"
+  },
+  "hero": {
+    "badge": "{version}-versiya chiqdi",
+    "title": "Oʻrganish uchun yaratilgan",
+    "titleAccent": "operatsion tizim",
+    "subtitle": "UzOS — kodi toza va izohlar bilan yozilgan kichik x86 operatsion tizimi. Uni bir daqiqada virtual mashinada ishga tushiring, soʻng kodini ochib, jarayonlar, xotira, foydalanuvchilar va xavfsizlik qanday ishlashini koʻring.",
+    "download": "UzOS {version} ni yuklab olish",
+    "docs": "Qoʻllanmani oʻqish",
+    "note": "Bepul va ochiq kodli · {size} MB ISO · QEMU va VirtualBox’da ishlaydi"
+  },
+  "stats": {
+    "commands": "buyruq",
+    "attacks": "hujum va ularning himoyasi",
+    "managements": "boshqaruv, 10 tasi tayyor",
+    "arch": "x86 himoyalangan rejim"
+  },
+  "modules": {
+    "title": "Operatsion tizimning 12 ta boshqaruvi",
+    "subtitle": "OT’ning har bir katta qismi alohida modul. Oʻntasi hozir oʻrganishga tayyor, ikkitasi navbatda.",
+    "try": "Sinab koʻring"
+  },
+  "structure": {
+    "title": "Bitta papka — bitta gʻoya",
+    "subtitle": "Har bir boshqaruv bir xil tartibda tuzilgan. Tartibni bir marta oʻrgansangiz, hammasida bemalol yoʻl topasiz.",
+    "folders": {
+      "core": {
+        "title": "core/",
+        "text": "Faqat yadroning oʻzi chaqiradigan qismlar, masalan taymer yoki rejalashtiruvchi."
+      },
+      "commands": {
+        "title": "commands/",
+        "text": "Har bir buyruq uchun alohida papka, ichida oʻzining .c va .h fayli."
+      },
+      "syscalls": {
+        "title": "syscalls/",
+        "text": "Dastur chaqira oladigan har bir tizim chaqiruvi uchun alohida papka."
+      },
+      "security": {
+        "title": "security/",
+        "text": "Har bir hujum uchun alohida papka, uni toʻxtatadigan himoya shu papkaning ichida."
+      }
+    },
+    "tree": {
+      "core": "yadro chaqiradigan qismlar",
+      "command": "bitta buyruq",
+      "syscall": "bitta tizim chaqiruvi",
+      "attack": "hujum",
+      "defence": "uning himoyasi"
+    },
+    "principlesTitle": "Nega oʻrganish oson",
+    "principles": [
+      {
+        "title": "Hammasi bir joyda",
+        "text": "Buyruqqa kerak boʻlgan hamma narsa uning papkasida. Bitta papkani oching — bitta narsani tushuning."
+      },
+      {
+        "title": "Tushuntirish kod yonida",
+        "text": "Har bir fayl izoh bilan boshlanadi: u nima qiladi, nimadan foydalanadi va nega aynan shunday yozilgan."
+      },
+      {
+        "title": "Hech narsa yashirin emas",
+        "text": "Har bir #include faylning toʻliq yoʻlini va undan nima olinishini koʻrsatadi."
+      },
+      {
+        "title": "Avval buz, keyin tuzat",
+        "text": "Har bir hujum oʻz himoyasi bilan yonma-yon turadi. Hujumni ishga tushiring, toʻsilganini koʻring, soʻng qanday toʻsilganini oʻqing."
+      }
+    ],
+    "codeCaption": "UzOS’dan haqiqiy fayl: bitta tizim chaqiruvi — bitta papka."
+  },
+  "quickstart": {
+    "title": "Uch qadamda ishga tushiring",
+    "subtitle": "Diskingizga hech narsa oʻrnatilmaydi. UzOS virtual mashina ichida ishlaydi.",
+    "step1": {
+      "title": "ISO’ni yuklab oling",
+      "text": "Bitta {size} MB li fayl — bu butun operatsion tizim."
+    },
+    "step2": {
+      "title": "QEMU’ni oʻrnating",
+      "text": "Linux, Windows va macOS uchun bepul emulyator."
+    },
+    "step3": {
+      "title": "Ishga tushiring",
+      "text": "root nomi bilan kiring (parol: uzos) va help deb yozing."
+    },
+    "more": "Oʻrnatishning boshqa usullari"
+  },
+  "screenshots": {
+    "title": "Ishlayotganini koʻring",
+    "subtitle": "QEMU’da ishlayotgan UzOS’dan olingan haqiqiy skrinshotlar.",
+    "items": {
+      "uzfetch": {
+        "label": "Tizim",
+        "caption": "uzfetch bayroq yonida tizim haqida maʼlumot beradi, ps jarayonlarni koʻrsatadi."
+      },
+      "seclab": {
+        "label": "Xavfsizlik",
+        "caption": "Fork bomb haqiqatda ishga tushiriladi va slot_quota himoyasi uni toʻsadi."
+      },
+      "htop": {
+        "label": "Jarayonlar",
+        "caption": "htop: fork bomb’ning 8 ta jarayoni protsessorni boʻlishib ishlatmoqda."
+      },
+      "btop": {
+        "label": "Monitor",
+        "caption": "btop: protsessor tarixi, xotira va jarayonlar ramkalarda."
+      },
+      "audit": {
+        "label": "Audit",
+        "caption": "audit nima va kimga rad etilganini, caps esa guest’ning imtiyozlarini koʻrsatadi."
+      },
+      "memory": {
+        "label": "Xotira",
+        "caption": "meminfo fizik xotirani koʻrsatadi, pagewalk manzilni sahifa jadvallari orqali kuzatadi."
+      },
+      "files": {
+        "label": "Fayllar",
+        "caption": "Egasi va ruxsatlari bilan fayllar hamda yadro yozgan /proc fayli."
+      },
+      "help": {
+        "label": "Buyruqlar",
+        "caption": "help barcha 83 ta buyruqni guruhlab koʻrsatadi."
+      },
+      "desktop": {
+        "label": "Ish stoli",
+        "caption": "startx sudrab koʻchirsa boʻladigan oynali kichik ish stolini ochadi."
+      },
+      "boot": {
+        "label": "Yuklanish",
+        "caption": "Yuklanish jurnali: yadroning har bir ishga tushgan qismi uchun bitta qator."
+      }
+    }
+  },
+  "learn": {
+    "title": "Talabalar va qiziquvchilar uchun",
+    "text": "UzOS — oʻquv loyihasi. Kod qisqa, izohli va har bir papka bitta savolga javob beradigan qilib ajratilgan: sahifalash qanday ishlaydi? Rejalashtiruvchi qaysi dasturni tanlaydi? Fork bomb’ni nima toʻxtatadi?",
+    "source": "Kodni koʻrish",
+    "guide": "Oʻrganishni boshlash"
+  },
+  "footer": {
+    "tagline": "Kompyuter aslida qanday ishlashini oʻrganish uchun kichik operatsion tizim.",
+    "product": "UzOS",
+    "resources": "Manbalar",
+    "install": "Oʻrnatish",
+    "source": "Manba kodi",
+    "releases": "Barcha versiyalar",
+    "issues": "Xatolik haqida xabar berish",
+    "rights": "UzOS loyihasi"
+  },
+  "download": {
+    "title": "UzOS’ni yuklab olish",
+    "subtitle": "Bitta ISO fayl. Uni virtual mashinada ishga tushiring yoki USB fleshkaga yozing.",
+    "button": "{file} ni yuklab olish",
+    "version": "Versiya",
+    "released": "Chiqqan sana",
+    "size": "Hajmi",
+    "arch": "Arxitektura",
+    "checksum": "SHA-256 nazorat summasi",
+    "verifyTitle": "Yuklangan faylni tekshiring",
+    "verifyText": "Natija yuqoridagi nazorat summasi bilan bir xil boʻlishi kerak. Agar farq qilsa, faylni qaytadan yuklab oling.",
+    "requirementsTitle": "Talablar",
+    "requirements": [
+      "x86 kompyuter yoki virtual mashina (32-bit yetarli)",
+      "128 MB operativ xotira",
+      "Legacy BIOS orqali yuklash (virtual mashinada odatda shunday)",
+      "Ish stoli (startx) uchun: QEMU’ning standart VGA’si yoki VirtualBox’ning VBoxVGA’si"
+    ],
+    "nextTitle": "Keyingi qadam: oʻrnatish",
+    "notesTitle": "{version}-versiyada nimalar bor",
+    "notes": [
+      "Birinchi ommaviy versiya",
+      "83 ta buyruq, koʻpchiligi Linux’dagi nomlar bilan",
+      "10 ta boshqaruv: jarayonlar, xotira, protsessor, qurilmalar, kiritish-chiqarish, fayllar, foydalanuvchilar, xavfsizlik, buyruq qatori va interfeys",
+      "Xavfsizlik laboratoriyasi: 70 ta hujum va har birining himoyasi",
+      "Grafik konsol va kichik oynalar boshqaruvchisi"
+    ],
+    "older": "Eski versiyalar va ularning tavsifi GitHub Releases’da."
+  },
+  "docs": {
+    "title": "Qoʻllanma",
+    "prev": "Oldingi",
+    "next": "Keyingi",
+    "menu": "Qoʻllanma boʻlimlari",
+    "fallback": "Bu sahifa hali tarjima qilinmagan, shuning uchun inglizcha koʻrsatilmoqda."
+  },
+  "notFound": {
+    "title": "Sahifa topilmadi",
+    "text": "Bunday sahifa yoʻq yoki boshqa joyga koʻchirilgan.",
+    "home": "Bosh sahifaga qaytish"
+  },
+  "management": {
+    "group": "Boshqaruvlar",
+    "onThisPage": "Bu sahifada",
+    "stats": {
+      "core": "asosiy qism",
+      "commands": "buyruq",
+      "syscalls": "tizim chaqiruvi",
+      "security": "hujum va himoya"
+    },
+    "notBuilt": "Bu boshqaruv hali yozilmagan. Sahifada u nimalarni oʻz ichiga olishi koʻrsatilgan; kod yozilgani sari boʻlimlar toʻladi.",
+    "sourceNote": "Quyidagi tavsiflar toʻgʻridan-toʻgʻri UzOS kodidagi izohlardan olingan, shuning uchun ular doim dolzarb va ingliz tilida.",
+    "core": {
+      "title": "Asosiy qismlar",
+      "intro": "Yadroning oʻzi chaqiradigan qismlar. Har biri oʻzining .c va .h fayli bor alohida papka."
+    },
+    "commands": {
+      "title": "Buyruqlar",
+      "intro": "Bularni UzOS buyruq qatorida yozing. Har bir buyruq oʻz papkasida turadi: commands/<nom>/, ichida cmd_<nom>.c va cmd_<nom>.h."
+    },
+    "syscalls": {
+      "title": "Tizim chaqiruvlari",
+      "intro": "Dastur yadrodan shunday yordam soʻraydi: raqamni EAX ga yozadi va int 0x80 ni bajaradi. Har bir chaqiruv syscalls/<nom>/ papkasida, ichida sys_<nom>.c va sys_<nom>.h."
+    },
+    "security": {
+      "title": "Hujumlar va himoyalar",
+      "intro": "Har bir hujum yadroning bitta qoidasini buzadi, yonidagi himoya esa uni toʻxtatadi. Xavfsiz sinash uchun seclab attack <id>, haqiqatda ishga tushirish uchun oxiriga live qoʻshing, tozalash uchun seclab repair."
+    },
+    "none": "Bu boshqaruvda hozircha yoʻq.",
+    "howItWorks": "Qanday ishlaydi",
+    "uses": "Foydalanadi",
+    "source": "Kodi",
+    "stub": "hali tayyor emas",
+    "attack": "Hujum",
+    "defence": "Himoya",
+    "breaks": "Buzadi",
+    "called": "Yadro qayerda tekshiradi",
+    "rules": "Qoidalar",
+    "why": "Nega",
+    "tryIt": "Sinab koʻring",
+    "more": "Batafsil",
+    "kinds": {
+      "live": "haqiqatda ishlaydi",
+      "illustration": "tushuntirish",
+      "concept": "gʻoya"
+    },
+    "severity": {
+      "info": "maʼlumot",
+      "low": "past",
+      "medium": "oʻrta",
+      "high": "yuqori",
+      "critical": "jiddiy"
+    },
+    "invariants": {
+      "resource": "resurslar: oʻrinlar, PID, steklar va xotira cheklangan",
+      "identity": "tanish: har bir PID faqat bitta jarayonni bildiradi",
+      "isolation": "ajratish: jarayonlar bir-birining xotirasiga tega olmaydi",
+      "privilege": "imtiyoz: foydalanuvchi kodi yadro huquqi bilan ishlay olmaydi",
+      "liveness": "navbat: hech bir jarayon boshqalarni kuttirib qoʻya olmaydi",
+      "consistency": "tartib: yadro jadvallari doim toʻgʻri qoladi",
+      "disclosure": "maxfiylik: eski yoki begona maʼlumot sizib chiqmaydi",
+      "trust": "ishonch: tashqaridan kelgan maʼlumot ishlatishdan oldin tekshiriladi",
+      "integrity": "butunlik: yadro kodi va audit jurnali oʻzgarmaydi"
+    }
+  }
+}

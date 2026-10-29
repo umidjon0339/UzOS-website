@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "title": "UzOS — a learning operating system",
+    "description": "UzOS is a small 32-bit x86 operating system written to be read. Download the ISO, boot it in QEMU or VirtualBox, and see how memory, processes and security really work."
+  },
+  "nav": {
+    "home": "Home",
+    "download": "Download",
+    "docs": "Docs",
+    "github": "GitHub",
+    "menu": "Menu",
+    "language": "Language",
+    "theme": "Toggle dark mode"
+  },
+  "hero": {
+    "badge": "Version {version} is out",
+    "title": "An operating system",
+    "titleAccent": "made for learning",
+    "subtitle": "UzOS is a small x86 operating system with clean, commented code. Boot it in a virtual machine in one minute, then open the source and see how processes, memory, users and security really work.",
+    "download": "Download UzOS {version}",
+    "docs": "Read the docs",
+    "note": "Free and open source · {size} MB ISO · runs in QEMU and VirtualBox"
+  },
+  "stats": {
+    "commands": "shell commands",
+    "attacks": "attacks, each with its defence",
+    "managements": "managements, 10 ready",
+    "arch": "x86 protected mode"
+  },
+  "modules": {
+    "title": "The 12 managements of an operating system",
+    "subtitle": "Every big part of an OS has its own module. Ten are ready to explore today, two are next.",
+    "try": "Try"
+  },
+  "structure": {
+    "title": "One folder, one idea",
+    "subtitle": "Every management is built the same way. Learn the layout once and you can find your way in all of them.",
+    "folders": {
+      "core": {
+        "title": "core/",
+        "text": "Only the parts the kernel itself calls, like the timer tick or the scheduler."
+      },
+      "commands": {
+        "title": "commands/",
+        "text": "One folder for each shell command, with its own .c and .h file."
+      },
+      "syscalls": {
+        "title": "syscalls/",
+        "text": "One folder for each system call a program can make."
+      },
+      "security": {
+        "title": "security/",
+        "text": "One folder for each attack, with the defence that stops it inside."
+      }
+    },
+    "tree": {
+      "core": "parts the kernel calls",
+      "command": "one command",
+      "syscall": "one system call",
+      "attack": "the attack",
+      "defence": "its defence"
+    },
+    "principlesTitle": "Why it is easy to learn",
+    "principles": [
+      {
+        "title": "Self-contained",
+        "text": "Everything a command needs is inside its folder. Open one folder, understand one thing."
+      },
+      {
+        "title": "Explained in place",
+        "text": "Every file starts with a comment: what it does, what it uses, and why it is built this way."
+      },
+      {
+        "title": "Nothing hidden",
+        "text": "Every #include uses the full path and says what it takes, so you always see which file is used."
+      },
+      {
+        "title": "Break it, then fix it",
+        "text": "Each attack sits next to its defence. Run it, watch it get blocked, then read how."
+      }
+    ],
+    "codeCaption": "A real file from UzOS: one system call, one folder."
+  },
+  "quickstart": {
+    "title": "Running in three steps",
+    "subtitle": "Nothing is installed on your disk. UzOS boots inside a virtual machine.",
+    "step1": {
+      "title": "Download the ISO",
+      "text": "One {size} MB file. It is the whole operating system."
+    },
+    "step2": {
+      "title": "Install QEMU",
+      "text": "A free emulator for Linux, Windows and macOS."
+    },
+    "step3": {
+      "title": "Boot it",
+      "text": "Log in as root (password uzos) and type help."
+    },
+    "more": "More ways to install"
+  },
+  "screenshots": {
+    "title": "See it running",
+    "subtitle": "Real screenshots, taken from UzOS running in QEMU.",
+    "items": {
+      "uzfetch": {
+        "label": "System",
+        "caption": "uzfetch shows the system next to the flag; ps lists the processes."
+      },
+      "seclab": {
+        "label": "Security lab",
+        "caption": "A fork bomb runs live, and its defence slot_quota blocks it."
+      },
+      "htop": {
+        "label": "Processes",
+        "caption": "htop while the fork bomb's 8 processes share the CPU."
+      },
+      "btop": {
+        "label": "Monitor",
+        "caption": "btop: CPU history, memory and processes in boxes."
+      },
+      "audit": {
+        "label": "Audit",
+        "caption": "audit shows what was refused and to whom; caps shows the privileges of guest."
+      },
+      "memory": {
+        "label": "Memory",
+        "caption": "meminfo shows physical RAM; pagewalk follows an address through the page tables."
+      },
+      "files": {
+        "label": "Files",
+        "caption": "Files with owners and permissions, and a /proc file written by the kernel."
+      },
+      "help": {
+        "label": "Commands",
+        "caption": "help lists all 83 commands in groups."
+      },
+      "desktop": {
+        "label": "Desktop",
+        "caption": "startx opens a small desktop with windows you can drag."
+      },
+      "boot": {
+        "label": "Boot",
+        "caption": "The boot log: one line for every part of the kernel that starts."
+      }
+    }
+  },
+  "learn": {
+    "title": "Made for students and the curious",
+    "text": "UzOS is a teaching project. The code is short, commented, and split so that each folder answers one question: how does paging work? How does the scheduler choose? What stops a fork bomb?",
+    "source": "View the source",
+    "guide": "Start learning"
+  },
+  "footer": {
+    "tagline": "A small operating system for learning how computers really work.",
+    "product": "UzOS",
+    "resources": "Resources",
+    "install": "Installation",
+    "source": "Source code",
+    "releases": "All releases",
+    "issues": "Report a problem",
+    "rights": "UzOS project"
+  },
+  "download": {
+    "title": "Download UzOS",
+    "subtitle": "One ISO file. Boot it in a virtual machine or write it to a USB stick.",
+    "button": "Download {file}",
+    "version": "Version",
+    "released": "Released",
+    "size": "Size",
+    "arch": "Architecture",
+    "checksum": "SHA-256 checksum",
+    "verifyTitle": "Check your download",
+    "verifyText": "The result must match the checksum above. If it does not, download the file again.",
+    "requirementsTitle": "Requirements",
+    "requirements": [
+      "An x86 PC or virtual machine (32-bit is enough)",
+      "128 MB of RAM",
+      "Legacy BIOS boot (in a VM this is the default)",
+      "For the desktop (startx): QEMU's standard VGA or VirtualBox's VBoxVGA"
+    ],
+    "nextTitle": "Next: install it",
+    "notesTitle": "What's in {version}",
+    "notes": [
+      "First public release",
+      "83 shell commands, many with the same names as in Linux",
+      "10 managements: processes, memory, CPU, devices, I/O, files, users, security, shell and interface",
+      "Security lab with 70 attacks, each with its defence",
+      "Graphical console and a small window manager"
+    ],
+    "older": "Older versions and release notes are on GitHub Releases."
+  },
+  "docs": {
+    "title": "Documentation",
+    "prev": "Previous",
+    "next": "Next",
+    "menu": "Docs menu",
+    "fallback": "This page is not translated yet, so it is shown in English."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "This page does not exist, or it moved.",
+    "home": "Back to home"
+  },
+  "management": {
+    "group": "Managements",
+    "onThisPage": "On this page",
+    "stats": {
+      "core": "core parts",
+      "commands": "commands",
+      "syscalls": "system calls",
+      "security": "attacks and defences"
+    },
+    "notBuilt": "This management is not built yet. This page shows what it will cover; the sections fill in as the code is written.",
+    "sourceNote": "The descriptions below come straight from the comments in the UzOS source code, so they are always up to date and written in English.",
+    "core": {
+      "title": "Core parts",
+      "intro": "The parts the kernel itself calls. Each one is a folder with its own .c and .h file."
+    },
+    "commands": {
+      "title": "Commands",
+      "intro": "Type these in the UzOS shell. Each command lives in its own folder, commands/<name>/, with cmd_<name>.c and cmd_<name>.h."
+    },
+    "syscalls": {
+      "title": "System calls",
+      "intro": "How a program asks the kernel for help: it puts the number in EAX and runs int 0x80. Each call lives in syscalls/<name>/ with sys_<name>.c and sys_<name>.h."
+    },
+    "security": {
+      "title": "Attacks and defences",
+      "intro": "Every attack breaks one rule of the kernel, and the defence next to it stops it. Run seclab attack <id> to simulate safely, add live to really run it, and seclab repair to clean up."
+    },
+    "none": "None in this management yet.",
+    "howItWorks": "How it works",
+    "uses": "Uses",
+    "source": "Source",
+    "stub": "not ready yet",
+    "attack": "Attack",
+    "defence": "Defence",
+    "breaks": "Breaks",
+    "called": "Where the kernel checks",
+    "rules": "Rules",
+    "why": "Why",
+    "tryIt": "Try it",
+    "more": "Read more",
+    "kinds": {
+      "live": "runs live",
+      "illustration": "illustration",
+      "concept": "concept"
+    },
+    "severity": {
+      "info": "info",
+      "low": "low",
+      "medium": "medium",
+      "high": "high",
+      "critical": "critical"
+    },
+    "invariants": {
+      "resource": "resources: slots, PIDs, stacks and memory are limited",
+      "identity": "identity: a PID always names exactly one process",
+      "isolation": "isolation: processes cannot touch each other's memory",
+      "privilege": "privilege: user code cannot act with kernel rights",
+      "liveness": "liveness: no process can starve the others",
+      "consistency": "consistency: kernel tables stay correct",
+      "disclosure": "disclosure: no leaking of old or foreign data",
+      "trust": "trust: input from outside is checked before use",
+      "integrity": "integrity: kernel code and the audit log stay unchanged"
+    }
+  }
+}

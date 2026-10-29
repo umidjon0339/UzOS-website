@@ -1,0 +1,44 @@
+# USB’dan yuklash
+
+ISO’ni USB fleshkaga yozib, haqiqiy kompyuterni u bilan ishga tushirishingiz mumkin.
+
+<Callout type="warning">
+**Tajribaviy.** UzOS virtual mashinalar uchun yaratilgan va ularda sinovdan oʻtgan. Haqiqiy kompyuterda matnli konsol odatda ishlaydi, ammo sichqoncha va grafik ish stoli (`startx`) ishlamasligi mumkin. ISO’ni yozish fleshkadagi **hamma narsani oʻchiradi**.
+</Callout>
+
+## Nima kerak
+
+- USB fleshka (64 MB dan katta istalgan hajm). Undagi maʼlumotlar oʻchiriladi.
+- **Legacy BIOS** (yoki **CSM**) rejimida yuklana oladigan kompyuter. 2020-yilgacha ishlab chiqarilgan aksariyat kompyuterlar buni qila oladi; yangilarida bu rejimni sozlamalardan yoqish kerak boʻlishi mumkin.
+
+## Linux
+
+1. Fleshkani ulang va uning nomini toping:
+
+   ```
+   lsblk
+   ```
+
+   Mos hajmdagi diskni qidiring, masalan `/dev/sdb`. **Ishonch hosil qiling**: notoʻgʻri diskni tanlash undagi maʼlumotlarni yoʻq qiladi.
+
+2. ISO’ni yozing (`/dev/sdX` ni fleshkangiz nomiga almashtiring):
+
+   ```
+   sudo dd if=UzOS.iso of=/dev/sdX bs=4M status=progress conv=fsync
+   ```
+
+## Windows
+
+1. [Rufus](https://rufus.ie) ni yuklab oling va ishga tushiring.
+2. **Device**: USB fleshkangiz. **Boot selection**: `UzOS.iso`.
+3. **Partition scheme**: `MBR`. **Target system**: `BIOS (or UEFI-CSM)`.
+4. **Start** ni bosing. Agar Rufus tasvirni qanday yozishni soʻrasa, **DD Image mode** ni tanlang.
+
+## Kompyuterni fleshkadan ishga tushirish
+
+1. Fleshkani kerakli kompyuterga ulang va uni yoqing.
+2. Yuklash menyusini oching, odatda **F12**, **F11**, **F8** yoki **Esc** bilan (tugma yoqilish paytida qisqa koʻrsatiladi).
+3. USB fleshkani tanlang. Agar ikkita band koʻrsangiz, nomida `UEFI` **boʻlmagan** bandni tanlang.
+4. GRUB UzOS’ni ishga tushiradi. `root` / `uzos` bilan kiring.
+
+Odatdagi tizimingizga qaytish uchun kompyuterni oʻchiring va fleshkani chiqarib oling.

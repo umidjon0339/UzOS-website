@@ -1,0 +1,33 @@
+# Introduction
+
+**UzOS** is a small operating system for 32-bit x86 PCs, written to be **read and understood**. It boots, manages memory, runs programs in user mode, schedules them, has users with passwords, a file system, a shell with 83 commands, and a small graphical desktop.
+
+Every part of the kernel lives in its own folder, with comments that explain *why* the code is the way it is. If you have ever wondered what really happens between pressing the power button and seeing a prompt, UzOS is for you.
+
+## Who it is for
+
+- **Students** taking an operating systems course who want to see the theory working
+- **Teachers** who need a small, readable system to show in class
+- **Curious programmers** who know C and want to look inside an OS
+
+## What you can do with it
+
+- Boot it in a virtual machine in about a minute
+- Explore it from the shell: `ps`, `top`, `meminfo`, `pagewalk`, `cat /proc/cpuinfo`
+- Run real attacks against the kernel in the **security lab** and watch the defences stop them
+- Read the source, change it, rebuild it with one `make` command
+
+## How these docs are organised
+
+| Section | What you will find |
+| --- | --- |
+| [First boot](/en/docs/getting-started) | Logging in, the first commands, keyboard shortcuts |
+| [Installation](/en/docs/install/qemu) | QEMU, VirtualBox, a USB stick, or building it yourself |
+| [Shell commands](/en/docs/commands) | Every command, grouped by topic |
+| [How UzOS is built](/en/docs/modules) | The kernel modules and where to find each part |
+| [Security lab](/en/docs/security-lab) | Attacks, defences, and the audit log |
+| [Managements](/en/docs/managements/process) | Each of the 12 managements: its commands, system calls, attacks and defences |
+
+<Callout type="tip">
+In a hurry? Download the ISO, install QEMU, and run `qemu-system-i386 -cdrom UzOS.iso -m 128`. Log in as `root` with the password `uzos`.
+</Callout>

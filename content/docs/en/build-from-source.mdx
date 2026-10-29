@@ -1,0 +1,65 @@
+# Build from source
+
+Building UzOS yourself takes about a minute. You need Linux (or WSL2 on Windows).
+
+## 1. Install the tools
+
+| Tool | Used for |
+| --- | --- |
+| `make` | Runs the build |
+| `gcc` with 32-bit support | Compiles the C code (`-m32`) |
+| `nasm` | Assembles the `.s` files |
+| `grub-mkrescue`, `xorriso`, `mtools` | Make the bootable ISO |
+| `qemu-system-i386` | Runs the result |
+
+**Ubuntu / Debian**
+
+```
+sudo apt install build-essential gcc-multilib nasm grub-pc-bin grub-common xorriso mtools qemu-system-x86
+```
+
+**Arch / Manjaro**
+
+```
+sudo pacman -S base-devel nasm grub libisoburn mtools qemu-system-x86
+```
+
+## 2. Get the code
+
+```
+git clone https://github.com/umidjon0339/UzOS.git
+cd UzOS
+```
+
+## 3. Build and run
+
+```
+make          # build kernel.bin
+make run      # boot it in QEMU
+```
+
+## All make targets
+
+| Command | What it does |
+| --- | --- |
+| `make` | Build `kernel.bin` |
+| `make run` | Boot `kernel.bin` in QEMU |
+| `make iso` | Build the bootable `UzOS.iso` (for VirtualBox or USB) |
+| `make check` | Check that the kernel has a valid Multiboot header |
+| `make clean` | Delete everything the build made |
+
+## Where things are
+
+```
+boot/      the first instructions, GRUB config, linker script
+arch/      x86 specifics: GDT, IDT, TSS, interrupts, the jump to user mode
+lib/       small helpers: strings, formatting, argument parsing
+modules/   the kernel itself, one folder per management
+userland/  an example program (hello.c) that runs in user mode
+```
+
+Each module follows the same layout: `core/` for the parts the kernel calls, `commands/` with one folder per shell command, `syscalls/` with one folder per system call, and `security/` for the attack and defence pairs. See [How UzOS is built](/en/docs/modules).
+
+<Callout type="tip">
+Object files go to `build/`, mirroring the source tree, so the source folders only ever contain code. Header edits trigger a rebuild automatically.
+</Callout>

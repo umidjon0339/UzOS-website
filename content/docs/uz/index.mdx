@@ -1,0 +1,33 @@
+# Kirish
+
+**UzOS** — 32-bitli x86 kompyuterlar uchun kichik operatsion tizim. U **oʻqib tushunish** uchun yozilgan. U yuklanadi, xotirani boshqaradi, dasturlarni foydalanuvchi rejimida ishga tushiradi va navbatga qoʻyadi, parolli foydalanuvchilarga, fayl tizimiga, 83 ta buyruqli shell’ga va kichik grafik ish stoliga ega.
+
+Yadroning har bir qismi oʻz papkasida joylashgan, izohlar esa kod *nima uchun* aynan shunday ekanini tushuntiradi. Agar kompyuter yoqilgan paytdan buyruq satri paydo boʻlguncha aslida nima sodir boʻlishi sizni qiziqtirgan boʻlsa, UzOS aynan siz uchun.
+
+## Kimlar uchun
+
+- Operatsion tizimlar kursini oʻqiyotgan va nazariyani amalda koʻrmoqchi boʻlgan **talabalar**
+- Darsda koʻrsatish uchun kichik va tushunarli tizim kerak boʻlgan **oʻqituvchilar**
+- C tilini biladigan va OT ichini koʻrmoqchi boʻlgan **qiziquvchan dasturchilar**
+
+## U bilan nima qilish mumkin
+
+- Uni virtual mashinada taxminan bir daqiqada ishga tushirish
+- Buyruq qatori orqali oʻrganish: `ps`, `top`, `meminfo`, `pagewalk`, `cat /proc/cpuinfo`
+- **Xavfsizlik laboratoriyasida** yadroga qarshi haqiqiy hujumlarni ishga tushirish va himoyalar ularni qanday toʻxtatishini kuzatish
+- Manba kodini oʻqish, oʻzgartirish va bitta `make` buyrugʻi bilan qayta yigʻish
+
+## Qoʻllanma qanday tuzilgan
+
+| Boʻlim | Unda nima bor |
+| --- | --- |
+| [Birinchi ishga tushirish](/uz/docs/getting-started) | Tizimga kirish, birinchi buyruqlar, tugmalar birikmalari |
+| [Oʻrnatish](/uz/docs/install/qemu) | QEMU, VirtualBox, USB fleshka yoki oʻzingiz yigʻish |
+| [Buyruqlar](/uz/docs/commands) | Barcha buyruqlar, mavzular boʻyicha |
+| [UzOS qanday tuzilgan](/uz/docs/modules) | Yadro modullari va har bir qism qayerdaligi |
+| [Xavfsizlik laboratoriyasi](/uz/docs/security-lab) | Hujumlar, himoyalar va audit jurnali |
+| [Boshqaruvlar](/uz/docs/managements/process) | 12 ta boshqaruvning har biri: buyruqlari, tizim chaqiruvlari, hujum va himoyalari |
+
+<Callout type="tip">
+Shoshyapsizmi? ISO’ni yuklab oling, QEMU’ni oʻrnating va `qemu-system-i386 -cdrom UzOS.iso -m 128` buyrugʻini bajaring. `root` sifatida `uzos` paroli bilan kiring.
+</Callout>

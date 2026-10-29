@@ -1,0 +1,80 @@
+# How UzOS is built
+
+The kernel is split into **managements**, one folder each under `modules/`. Every management answers one big question about operating systems, and they are all built the same way.
+
+## The life of UzOS in four steps
+
+1. **GRUB** loads `kernel.bin` into memory and jumps to `boot/boot.s`.
+2. `boot.s` sets up a stack and calls `kernel_main` in `modules/core/`.
+3. `kernel_main` starts every management in order (you see this as the boot log).
+4. The **shell** shows the login prompt and waits for you.
+
+## The 12 managements
+
+| Management | The question it answers | Status |
+| --- | --- | --- |
+| `process_management` | What is a process? The process table, context switching, ELF loading, system calls, signals | Ready |
+| `memory_management` | Where does memory come from? 4 KB frames, paging, the kernel heap, `sbrk` / `mmap` | Ready |
+| `cpu_management` | Who runs next? Priorities, FIFO / RR, aging, CPU accounting, `perf` | Ready |
+| `device_management` | How does the kernel talk to hardware? Timer, keyboard, mouse, clock, screen, graphics | Ready |
+| `io_management` | What is a file descriptor? `open`, `read`, `write`, `close`, `seek` | Ready |
+| `filesystem_management` | Where are files kept? The directory tree, the RAM disk, `/proc` | Ready |
+| `user_management` | Who are you? Accounts, SHA-256 passwords, login, file owners and modes | Ready |
+| `security_management` | Who may do what, and what was tried? Privileges, the audit log, kernel integrity | Ready |
+| `shell` | How does a command line work? Parsing, history, Tab completion, highlighting | Ready |
+| `ui` | How should output look? Colours by meaning, boxes, bars, the status bar | Ready |
+| `network_management` | How do computers talk? A network card driver, IP, TCP / UDP, sockets | Planned |
+| `storage_management` | How do files survive a reboot? A disk driver and an on-disk file system | Planned |
+
+## One folder, one idea
+
+Every management has the same four folders:
+
+```
+modules/cpu_management/
+  core/                     parts the kernel itself calls
+    tsc/  tsc.c  tsc.h
+  commands/                 one folder per shell command
+    top/  cmd_top.c  cmd_top.h
+  syscalls/                 one folder per system call
+    getpid/  sys_getpid.c  sys_getpid.h
+  security/                 one folder per attack
+    fork_bomb/
+      atk_fork_bomb.c       the attack
+      README.md             the real-world story
+      defence/
+        process_quota/
+          def_process_quota.c   the defence that stops it
+```
+
+| Folder | What goes in it |
+| --- | --- |
+| `core/` | Only what the kernel itself calls (the timer tick, the scheduler) or state that must exist once |
+| `commands/<name>/` | One shell command: `cmd_<name>.c` and its own header `cmd_<name>.h` |
+| `syscalls/<name>/` | One system call: `sys_<name>.c` and `sys_<name>.h` |
+| `security/<attack>/` | One attack (`atk_<attack>.c` + `README.md`), with its defence inside `defence/<defence>/` |
+
+## Why this makes UzOS easy to learn
+
+- **Self-contained.** Everything a command, system call, attack or defence needs is inside its folder. Small helpers are copied rather than shared, so you never have to jump around to understand one thing.
+- **Explained in place.** Every file starts with a comment: what it does, what it *uses*, and why it is written this way.
+- **Nothing hidden.** Every `#include` names the full path and says what it takes from that file:
+
+  ```
+  #include "modules/process_management/core/scheduler/scheduler.h"   // scheduler_get_current_process
+  ```
+
+- **Break it, then fix it.** Each attack lives next to the defence that stops it. Run it with `seclab`, watch it get blocked, then read both files side by side.
+
+So when you want to know how `top` works, open `modules/cpu_management/commands/top/`. That folder is the whole answer.
+
+## Good places to start reading
+
+- **Paging**: `modules/memory_management/core/vmm/`, then try `pagewalk 0xB8000` (the VGA text memory) in the shell
+- **Context switch**: `modules/process_management/core/scheduler/switch_task.s`
+- **Passwords**: `modules/user_management/core/hash/`, SHA-256 written out step by step
+- **A system call from start to end**: `modules/process_management/syscalls/handler/`
+
+<Callout type="tip">
+The repository has a longer `UzOS_Learning_Guide.md` and a `README.md` in each management with the full map of its files.
+</Callout>

@@ -1,0 +1,73 @@
+# Run in QEMU
+
+[QEMU](https://www.qemu.org) is a free emulator: it pretends to be a whole PC, so UzOS can run in a window without touching your disk. It is the **easiest and recommended** way to try UzOS.
+
+## 1. Download UzOS
+
+Get `UzOS.iso` from the [download page](/en/download) and remember the folder it was saved to.
+
+## 2. Install QEMU
+
+**Ubuntu / Debian / Linux Mint**
+
+```
+sudo apt install qemu-system-x86
+```
+
+**Fedora**
+
+```
+sudo dnf install qemu-system-x86
+```
+
+**Arch / Manjaro**
+
+```
+sudo pacman -S qemu-system-x86
+```
+
+**macOS** (with [Homebrew](https://brew.sh))
+
+```
+brew install qemu
+```
+
+**Windows**
+
+Download the installer from [qemu.org/download](https://www.qemu.org/download/#windows) and run it. Then add the QEMU folder (usually `C:\Program Files\qemu`) to your `PATH`, or run the commands below from inside that folder.
+
+## 3. Start UzOS
+
+Open a terminal in the folder with the ISO and run:
+
+```
+qemu-system-i386 -cdrom UzOS.iso -m 128
+```
+
+A window opens, GRUB starts UzOS after 3 seconds, and you see the login prompt. Log in as `root` with the password `uzos`. See [First boot](/en/docs/getting-started) for what to do next.
+
+## Useful options
+
+```
+qemu-system-i386 -cdrom UzOS.iso -m 128 -rtc base=localtime -display gtk,zoom-to-fit=on
+```
+
+| Option | Meaning |
+| --- | --- |
+| `-cdrom UzOS.iso` | Boot from the ISO, as if it were a CD |
+| `-m 128` | Give the machine 128 MB of RAM |
+| `-rtc base=localtime` | The clock shows your local time instead of UTC |
+| `-display gtk,zoom-to-fit=on` | Resizing the window stretches the picture (Linux) |
+
+## Mouse and keyboard
+
+Click inside the window to use the mouse in UzOS. To get your mouse back, press **Ctrl+Alt+G**.
+
+## Problems?
+
+<Callout type="warning">
+**`command not found: qemu-system-i386`**: QEMU is not installed, or not on your `PATH`. On Linux install the package above; on Windows use the full path, for example `"C:\Program Files\qemu\qemu-system-i386.exe"`.
+</Callout>
+
+- **The window stays black for a few seconds**: that is GRUB waiting. Press Enter to start right away.
+- **It is very slow**: close other heavy programs. On Linux you can add `-accel kvm` to use hardware virtualisation.

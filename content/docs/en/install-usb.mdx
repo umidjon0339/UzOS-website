@@ -1,0 +1,44 @@
+# Boot from USB
+
+You can write the ISO to a USB stick and start a real PC with it.
+
+<Callout type="warning">
+**Experimental.** UzOS is made and tested for virtual machines. On real hardware the text console usually works, but the mouse and the graphical desktop (`startx`) may not. Writing the ISO **erases everything** on the USB stick.
+</Callout>
+
+## What you need
+
+- A USB stick (any size above 64 MB). Its contents will be deleted.
+- A PC that can boot in **Legacy BIOS** (also called **CSM**) mode. Most PCs made before 2020 can; newer ones may need it enabled in the firmware settings.
+
+## Linux
+
+1. Plug in the stick and find its name:
+
+   ```
+   lsblk
+   ```
+
+   Look for a disk of the right size, such as `/dev/sdb`. **Be sure**: choosing the wrong disk destroys its data.
+
+2. Write the ISO (replace `/dev/sdX` with your stick):
+
+   ```
+   sudo dd if=UzOS.iso of=/dev/sdX bs=4M status=progress conv=fsync
+   ```
+
+## Windows
+
+1. Download [Rufus](https://rufus.ie) and start it.
+2. **Device**: your USB stick. **Boot selection**: `UzOS.iso`.
+3. **Partition scheme**: `MBR`. **Target system**: `BIOS (or UEFI-CSM)`.
+4. Click **Start**. If Rufus asks how to write the image, choose **DD Image mode**.
+
+## Start the PC from the stick
+
+1. Plug the stick into the PC you want to use and turn it on.
+2. Open the boot menu, usually with **F12**, **F11**, **F8** or **Esc** (the key is shown briefly at power-on).
+3. Choose the USB stick. If you see two entries, pick the one **without** `UEFI` in its name.
+4. GRUB starts UzOS. Log in as `root` / `uzos`.
+
+To go back to your normal system, turn the PC off and remove the stick.

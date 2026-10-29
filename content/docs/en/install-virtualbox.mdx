@@ -1,0 +1,40 @@
+# Run in VirtualBox
+
+[VirtualBox](https://www.virtualbox.org) is a free virtual machine program with a graphical interface, for Windows, macOS (Intel) and Linux. Use it if you prefer clicking to typing commands.
+
+## 1. Create the virtual machine
+
+1. Download `UzOS.iso` from the [download page](/en/download).
+2. Open VirtualBox and click **New**.
+3. Fill in:
+   - **Name**: `UzOS`
+   - **ISO Image**: choose the downloaded `UzOS.iso`
+   - **Type**: `Other`
+   - **Version**: `Other/Unknown` (32-bit)
+4. If VirtualBox offers *unattended installation*, tick **Skip Unattended Installation**.
+5. **Memory**: `128 MB` (more is fine). **Processors**: `1`.
+6. **Hard disk**: choose **Do not add a virtual hard disk**. UzOS runs entirely from RAM.
+7. Click **Finish**.
+
+## 2. Check two settings
+
+Select the new machine and open **Settings**:
+
+| Where | Set to | Why |
+| --- | --- | --- |
+| System → Motherboard → **Enable EFI** | **Off** | UzOS boots with a classic BIOS |
+| Display → Screen → **Graphics Controller** | **VBoxVGA** | Needed for the desktop (`startx`) |
+
+## 3. Start it
+
+Click **Start**. GRUB starts UzOS after 3 seconds. Log in as `root` with the password `uzos`.
+
+<Callout type="note">
+VirtualBox "captures" the mouse when you click in the window. Press the **Host key** (right `Ctrl` on Windows and Linux, left `⌘` on macOS) to release it.
+</Callout>
+
+## Problems?
+
+- **"No bootable medium found"**: the ISO is not attached. In *Settings → Storage*, select the empty CD drive and choose `UzOS.iso`.
+- **Black screen after GRUB**: make sure *Enable EFI* is off.
+- **`startx` shows nothing**: set the graphics controller to *VBoxVGA* and restart the machine.

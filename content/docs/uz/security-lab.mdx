@@ -1,0 +1,52 @@
+# Xavfsizlik laboratoriyasi
+
+UzOS **70 ta hujum** bilan keladi, ularning har biri uni toʻxtatuvchi **himoya** bilan juftlangan. Hujum haqida oʻqishingiz, uni xavfsiz sinab koʻrishingiz, haqiqatda ishga tushirishingiz va himoya uni qanday rad etganini audit jurnalida koʻrishingiz mumkin.
+
+## seclab buyrugʻi
+
+```
+seclab list                  barcha hujumlar va ularning himoyasi
+seclab info <hujum>          u nima qiladi va uni nima toʻxtatadi
+seclab attack <id>           sinov: hech narsani oʻzgartirmaydi, doim xavfsiz
+seclab attack <id> live      haqiqatda ishga tushirish (kichik va cheklangan, faqat root)
+seclab defence <id>          himoyani koʻrsatish
+seclab verify <id> | all     himoyalarning oʻz-oʻzini sinovlari
+seclab log                   eng yangi rad etishlar birinchi
+seclab status                hisoblagichlar, watchdog, boʻsh jarayon oʻrinlari
+seclab repair                har bir hujumni oʻzini bekor qildirish (faqat root)
+```
+
+## Sinab koʻring: fork bomb
+
+*Fork bomb* hech kim uchun boʻsh oʻrin qolmaguncha toʻxtovsiz yangi jarayon yaratadi. Uning himoyasi `slot_quota` bitta foydalanuvchida nechta jarayon boʻlishi mumkinligini cheklaydi.
+
+```
+seclab info fork_bomb        u haqida oʻqish
+seclab attack fork_bomb      sinov (aslida hech narsa oʻzgarmaydi)
+seclab attack fork_bomb live root sifatida haqiqatda ishga tushirish
+audit                        slot_quota nimani rad etganini koʻrish
+seclab status                jarayonlar jadvali hali ham ishlaydi
+```
+
+Agar hujumni uning oʻz himoyasi rad etsa, jonli ishga tushirish **BLOCKED** deb koʻrsatiladi. Bu aynan shu himoya ishlashini isbotlaydi.
+
+## Yana biri: yadroni oʻzgartirish
+
+`kernel_patch` yadro kodiga bitta bayt yozadi. `integrity_check` himoyasi yadroning yuklanish paytidagi SHA-256 xeshini saqlaydi, `exec` esa oʻzgartirilgan yadroda dasturlarni ishga tushirishni rad etadi.
+
+```
+integrity                    yadro hali ham yuklangandagi holatidami?
+seclab info kernel_patch
+```
+
+## Himoya qanday ishlaydi
+
+- **Imtiyozlar (capabilities)**: root’ning kuchi `CAP_KILL`, `CAP_SETUID` va `CAP_SECLAB` kabi nomlangan imtiyozlarga boʻlingan. Har bir tekshiruv aynan bittasini soʻraydi. `caps` va `caps guest` ni sinab koʻring.
+- **Audit jurnali**: har bir rad etish vaqt, foydalanuvchi va PID bilan yoziladi. Uni hech kim tozalay olmaydi. `audit` va `audit sum` ni sinab koʻring.
+- **Yadro butunligi**: yuklanish paytida oʻlchangan yadro kodi va konstantalarining SHA-256 xeshi.
+
+<Callout type="note">
+Jonli hujumlar kichik va cheklangan, `seclab repair` esa ularni bekor qiladi. 32-bitli virtual mashina haqiqatda bajara olmaydigan baʼzi hujumlar halol tushuntirish sifatida koʻrsatiladi.
+</Callout>
+
+Har bir hujumning papkasida, masalan `modules/process_management/security/fork_bomb/`, haqiqiy hayotdagi hujum va himoyani tushuntiruvchi `README.md` bor.

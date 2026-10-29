@@ -1,0 +1,114 @@
+# Buyruqlar
+
+UzOS’da 83 ta buyruq bor. Ularning koʻpi Linux’dagi bilan bir xil nom va chiqish koʻrinishiga ega, shuning uchun bu yerda oʻrganganlaringiz u yerda ham ishlaydi. Batafsil maʼlumot uchun UzOS ichida `help <buyruq>` deb yozing.
+
+## Buyruq qatori
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `help [buyruq]` | Qanday buyruqlar borligi |
+| `clear` | Ekranni va orqaga aylantirish xotirasini tozalash |
+| `echo <matn>` | Matnni qaytarib chiqarish |
+| `calc <ifoda>` | Butun sonli kalkulyator, masalan `calc (2+3)*4` |
+| `color <fg> [bg]` | Matn rangini oʻzgartirish |
+| `history` | Shu paytgacha yozilgan buyruqlar |
+| `uzfetch` | Chapda bayroq, oʻngda tizim haqida maʼlumot |
+| `statusbar [on\|off]` | Yuqori panelni koʻrsatish yoki yashirish |
+| `snake` | Mashhur "ilon" oʻyini, matn rejimida |
+
+## Fayllar
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `ls [yoʻl]` | Papka tarkibi, egalari va huquqlari bilan |
+| `cd [yoʻl]` | Papkani almashtirish (yoʻlsiz: uy papkasiga) |
+| `pwd` | Joriy papkani chiqarish |
+| `cat <yoʻl>` | Faylni toʻliq chiqarish |
+| `touch <yoʻl>` | Boʻsh fayl yaratish |
+| `write <yoʻl> <matn>` | Fayl tarkibini almashtirish |
+| `mkdir <yoʻl>` | Papka yaratish |
+| `rm <yoʻl>` | Fayl yoki boʻsh papkani oʻchirish |
+| `cp <qayerdan> <qayerga>` | Faylni nusxalash |
+| `mv <qayerdan> <qayerga>` | Koʻchirish yoki nomini oʻzgartirish |
+| `wc <yoʻl>` | Qator, soʻz va baytlarni sanash |
+| `grep <soʻz> <yoʻl>` | Soʻz uchragan qatorlarni chiqarish |
+| `hexdump <yoʻl> [bayt]` | Faylni bayt-baytlab koʻrsatish |
+
+## Foydalanuvchilar va huquqlar
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `whoami` | Siz qaysi foydalanuvchi nomidan ishlayotganingiz |
+| `id [foydalanuvchi]` | Foydalanuvchining uid’i, nomi va uy papkasi |
+| `users` | Barcha hisoblar |
+| `su [foydalanuvchi]` | Boshqa foydalanuvchiga oʻtish |
+| `logout` | Kirish oynasiga qaytish |
+| `passwd [foydalanuvchi]` | Parolni oʻzgartirish |
+| `chmod <rejim> <yoʻl>` | Faylni kim oʻqiy va yoza olishini belgilash |
+| `chown <foydalanuvchi> <yoʻl>` | Faylni boshqa foydalanuvchiga berish |
+| `useradd <nom>` | Hisob yaratish (faqat root) |
+| `userdel <nom>` | Hisobni oʻchirish (faqat root) |
+
+## Jarayonlar
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `ps` | Hozir ishlayotgan jarayonlar roʻyxati |
+| `exec <fayl> [&]` | ELF dasturni yuklab ishga tushirish, masalan `exec /hello` |
+| `kill <pid>` | Jarayonni toʻxtatish |
+| `spawn` | Fonda ishlovchi jarayonni boshlash |
+| `sleep <soniya>` | Kutish (Ctrl+C uni erta tugatadi) |
+| `testuser [null\|badptr]` | Ring 3 da kichik dasturni ishga tushirish |
+
+## Protsessor va rejalashtirish
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `top`, `htop`, `btop` | Protsessor va jarayonlarni jonli kuzatish (`q` — chiqish) |
+| `lscpu`, `cpuinfo` | Protsessor nima va qanday sozlangan |
+| `nproc`, `getconf` | Protsessorlar soni va tizim oʻlchamlari |
+| `uptime` | Ishlash vaqti, foydalanuvchilar va load average |
+| `vmstat`, `mpstat`, `pidstat`, `sar`, `cpustat` | Protsessor vaqti nimaga sarflangani |
+| `nice`, `renice` | Jarayonni boshqa ustuvorlik bilan boshlash yoki oʻzgartirish |
+| `chrt` | Rejalashtirish siyosatini koʻrish va oʻrnatish (FIFO, RR, ...) |
+| `taskset`, `numactl` | Protsessorga bogʻlash va NUMA joylashuvi |
+| `ulimit` | Resurs cheklovlari |
+| `time <buyruq>` | Buyruq qancha vaqt olgani |
+| `perf stat\|record\|report` | Hodisalarni sanash va protsessor vaqti qayerga ketishini topish |
+| `faults` | Protsessor istisnolari va ular tugatgan jarayonlar |
+| `cpupower`, `turbostat`, `powerprofilesctl` | Chastota, kutish holatlari, quvvat profili |
+| `systemctl`, `systemd-cgtop` | Xizmatlar va ularning resurs sarfi |
+| `cpucalls` | Har bir protsessor tizim chaqiruvini ring 3 dan sinash |
+
+## Xotira
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `meminfo` | Band va boʻsh fizik RAM |
+| `heapinfo` | Yadro xotirasini (heap) koʻrib chiqish |
+| `memtest` | `sbrk`, `mmap` va `munmap` ni sinash |
+| `pagewalk <manzil>` | Manzilni sahifa jadvallari orqali kuzatish |
+| `ioinfo [pid]` | Jarayonning ochiq fayl deskriptorlari |
+
+## Qurilmalar va ekran
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `devices` | Qurilmalar va ularning uzilishlar soni |
+| `date` | Real vaqt soatidan sana va vaqt |
+| `mode [nom]` | Ekran rejimlari roʻyxati yoki almashtirish, masalan `mode 1280x720` |
+| `theme [nom]` | Rang mavzulari roʻyxati yoki almashtirish |
+| `font [uzos\|bios]` | Konsol shriftini koʻrish yoki oʻzgartirish |
+| `startx` | Grafik ish stoli (chiqish: ESC) |
+| `beep [hz]`, `play` | PC dinamigida ovoz yoki kuy |
+
+## Xavfsizlik
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `seclab` | Xavfsizlik laboratoriyasi, [Xavfsizlik laboratoriyasi](/uz/docs/security-lab) ga qarang |
+| `audit [sum]` | Himoyalar nimani va kimga rad etgani |
+| `caps [foydalanuvchi]` | Foydalanuvchida qanday imtiyozlar borligi |
+| `integrity` | Yadro hali ham yuklangandagi holatidami? |
+
+`/proc` dagi fayllarni yadro siz ularni oʻqiganingizda yozadi: `cat /proc/cpuinfo`, `cat /proc/stat` yoki `ps` dan olingan PID bilan `cat /proc/<pid>/status` ni sinab koʻring.

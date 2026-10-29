@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UzOS website
 
-## Getting Started
+The website of [UzOS](https://github.com/umidjon0339/UzOS): home page, downloads and documentation, in English, Uzbek and Russian.
 
-First, run the development server:
+Built with Next.js 16 (App Router), Tailwind CSS 4 and MDX. Every page is static.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things are
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/[lang]/                 every page, once per language (/en, /uz, /ru)
+  page.tsx                  home
+  download/page.tsx         download page
+  docs/layout.tsx           docs sidebar
+  docs/[[...slug]]/page.tsx renders one MDX doc
+  docs/managements/[id]/    one page per management (from lib/os-data.json)
+components/                 Navbar, Footer, CodeBlock, Callout, ManagementDoc, ...
+content/docs/<lang>/*.mdx   the documentation text
+i18n/dictionaries/*.json    the UI text (en.json is the reference)
+lib/docs.ts                 the docs tree: sidebar order, titles, URLs
+lib/modules.ts              the 12 managements: icon, name, short text
+lib/os-data.json            commands, syscalls, attacks... read from the UzOS source
+scripts/extract-uzos.mjs    writes lib/os-data.json
+lib/release.ts              current version, ISO link, size, SHA-256
+proxy.ts                    sends "/" to /en, /uz or /ru
+public/screenshots/         real UzOS screenshots (QEMU)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Common tasks
 
-## Learn More
+**Publish a new UzOS version**: in the UzOS repo run `make iso` and `sha256sum UzOS.iso`, create a GitHub Release with tag `v<version>` and attach the ISO, then update `lib/release.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+**UzOS code changed** (new command, syscall, attack...): run `npm run extract` (it reads `../New-UzOS`; pass another path with `node scripts/extract-uzos.mjs <path>`), then commit `lib/os-data.json`. The management pages are built from the header comments, so a good comment in the code is a good line in the docs.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Add a doc page**: write `content/docs/en/<file>.mdx` (plus `uz/` and `ru/`; a missing translation falls back to English) and add an entry to `lib/docs.ts`. `<Callout type="note|tip|warning">` works in every MDX file.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Change UI text**: edit the three files in `i18n/dictionaries/`. They must have the same keys.
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Import this repository in [Vercel](https://vercel.com/new). There are no settings or environment variables to change.

@@ -1,0 +1,73 @@
+# QEMU’da ishga tushirish
+
+[QEMU](https://www.qemu.org) — bepul emulyator: u butun bir kompyuter oʻrnini bosadi, shuning uchun UzOS diskingizga tegmasdan oynada ishlaydi. Bu UzOS’ni sinab koʻrishning **eng oson va tavsiya etilgan** usuli.
+
+## 1. UzOS’ni yuklab oling
+
+[Yuklab olish sahifasidan](/uz/download) `UzOS.iso` faylini oling va u saqlangan papkani eslab qoling.
+
+## 2. QEMU’ni oʻrnating
+
+**Ubuntu / Debian / Linux Mint**
+
+```
+sudo apt install qemu-system-x86
+```
+
+**Fedora**
+
+```
+sudo dnf install qemu-system-x86
+```
+
+**Arch / Manjaro**
+
+```
+sudo pacman -S qemu-system-x86
+```
+
+**macOS** ([Homebrew](https://brew.sh) bilan)
+
+```
+brew install qemu
+```
+
+**Windows**
+
+Oʻrnatuvchini [qemu.org/download](https://www.qemu.org/download/#windows) sahifasidan yuklab oling va ishga tushiring. Soʻng QEMU papkasini (odatda `C:\Program Files\qemu`) `PATH` ga qoʻshing yoki quyidagi buyruqlarni shu papka ichidan bajaring.
+
+## 3. UzOS’ni ishga tushiring
+
+ISO joylashgan papkada terminal oching va bajaring:
+
+```
+qemu-system-i386 -cdrom UzOS.iso -m 128
+```
+
+Oyna ochiladi, GRUB 3 soniyadan keyin UzOS’ni ishga tushiradi va kirish oynasini koʻrasiz. `root` sifatida `uzos` paroli bilan kiring. Keyin nima qilish haqida [Birinchi ishga tushirish](/uz/docs/getting-started) sahifasiga qarang.
+
+## Foydali parametrlar
+
+```
+qemu-system-i386 -cdrom UzOS.iso -m 128 -rtc base=localtime -display gtk,zoom-to-fit=on
+```
+
+| Parametr | Maʼnosi |
+| --- | --- |
+| `-cdrom UzOS.iso` | ISO’dan xuddi CD kabi yuklash |
+| `-m 128` | Mashinaga 128 MB RAM berish |
+| `-rtc base=localtime` | Soat UTC emas, mahalliy vaqtni koʻrsatadi |
+| `-display gtk,zoom-to-fit=on` | Oyna oʻlchami oʻzgarganda tasvir ham choʻziladi (Linux) |
+
+## Sichqoncha va klaviatura
+
+UzOS’da sichqonchadan foydalanish uchun oyna ichiga bosing. Sichqonchani qaytarib olish uchun **Ctrl+Alt+G** ni bosing.
+
+## Muammolar
+
+<Callout type="warning">
+**`command not found: qemu-system-i386`**: QEMU oʻrnatilmagan yoki `PATH` da yoʻq. Linux’da yuqoridagi paketni oʻrnating; Windows’da toʻliq yoʻldan foydalaning, masalan `"C:\Program Files\qemu\qemu-system-i386.exe"`.
+</Callout>
+
+- **Oyna bir necha soniya qora turadi**: bu GRUB kutmoqda. Darhol boshlash uchun Enter’ni bosing.
+- **Juda sekin ishlaydi**: boshqa ogʻir dasturlarni yoping. Linux’da apparat virtualizatsiyasidan foydalanish uchun `-accel kvm` qoʻshishingiz mumkin.

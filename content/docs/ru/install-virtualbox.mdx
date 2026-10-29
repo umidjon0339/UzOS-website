@@ -1,0 +1,40 @@
+# Запуск в VirtualBox
+
+[VirtualBox](https://www.virtualbox.org) — бесплатная программа для виртуальных машин с графическим интерфейсом для Windows, macOS (Intel) и Linux. Выбирайте её, если вам удобнее нажимать кнопки, чем вводить команды.
+
+## 1. Создайте виртуальную машину
+
+1. Скачайте `UzOS.iso` на [странице загрузки](/ru/download).
+2. Откройте VirtualBox и нажмите **New** (Создать).
+3. Заполните:
+   - **Name**: `UzOS`
+   - **ISO Image**: выберите скачанный `UzOS.iso`
+   - **Type**: `Other`
+   - **Version**: `Other/Unknown` (32-bit)
+4. Если VirtualBox предлагает *unattended installation* (автоматическую установку), отметьте **Skip Unattended Installation**.
+5. **Memory** (память): `128 MB` (можно больше). **Processors**: `1`.
+6. **Hard disk**: выберите **Do not add a virtual hard disk**. UzOS полностью работает из RAM.
+7. Нажмите **Finish**.
+
+## 2. Проверьте две настройки
+
+Выберите новую машину и откройте **Settings** (Настройки):
+
+| Где | Значение | Зачем |
+| --- | --- | --- |
+| System → Motherboard → **Enable EFI** | **Выключено** | UzOS загружается через классический BIOS |
+| Display → Screen → **Graphics Controller** | **VBoxVGA** | Нужно для рабочего стола (`startx`) |
+
+## 3. Запустите
+
+Нажмите **Start**. GRUB запустит UzOS через 3 секунды. Войдите как `root` с паролем `uzos`.
+
+<Callout type="note">
+VirtualBox «захватывает» мышь, когда вы щёлкаете в окне. Чтобы освободить её, нажмите **Host key** (правый `Ctrl` в Windows и Linux, левый `⌘` в macOS).
+</Callout>
+
+## Проблемы
+
+- **«No bootable medium found»**: ISO не подключён. В *Settings → Storage* выберите пустой CD-привод и укажите `UzOS.iso`.
+- **Чёрный экран после GRUB**: убедитесь, что *Enable EFI* выключен.
+- **`startx` ничего не показывает**: выберите графический контроллер *VBoxVGA* и перезапустите машину.

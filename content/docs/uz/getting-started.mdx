@@ -1,0 +1,68 @@
+# Birinchi ishga tushirish
+
+Bu sahifada UzOS ishga tushganda nimani koʻrishingiz va birinchi navbatda nima yozish kerakligi koʻrsatilgan. Agar hali ishga tushirmagan boʻlsangiz, avval [QEMU’da ishga tushirish](/uz/docs/install/qemu) sahifasiga qarang.
+
+## 1. Yuklanish
+
+1. **GRUB** bitta *UzOS* bandli menyuni koʻrsatadi. 3 soniyadan keyin oʻzi ishga tushadi (yoki Enter’ni bosing).
+2. Yadro **yuklanish jurnalini** chiqaradi: har bir qism uchun bitta `[ OK ]` qatori (taymer, klaviatura, xotira, sahifalash, foydalanuvchilar, rejalashtiruvchi...).
+3. **Kirish oynasi** paydo boʻladi: `uzos login:`
+
+## 2. Tizimga kirish
+
+UzOS’da ikkita hisob bor:
+
+| Foydalanuvchi | Parol | Nima qila oladi |
+| --- | --- | --- |
+| `root` | `uzos` | Hamma narsani (barcha imtiyozlar) |
+| `guest` | `guest` | Oddiy foydalanuvchi: faqat oʻz fayllari va jarayonlari |
+
+Foydalanuvchi nomini yozing, Enter’ni bosing, soʻng parolni kiriting. Buyruq qatori kimligingiz va qayerdaligingizni koʻrsatadi: root uchun `root@uzos:~#`, oddiy foydalanuvchi uchun `guest@uzos:~$`.
+
+## 3. Birinchi buyruqlar
+
+```
+help              barcha buyruqlar roʻyxati
+help ls           bitta buyruq haqida yordam
+uzfetch           bayroq yonida tizim haqida qisqacha maʼlumot
+ls /              ildiz papkadagi fayllar
+cat /proc/cpuinfo protsessor haqida, yadro yozgan maʼlumot
+ps                ishlayotgan jarayonlar
+meminfo           qancha RAM band va boʻsh
+top               protsessorni jonli kuzatish (chiqish: q yoki Ctrl+C)
+```
+
+## 4. Bilish foydali boʻlgan tugmalar
+
+| Tugma | Vazifasi |
+| --- | --- |
+| `Tab` | Buyruq yoki yoʻlni toʻldirish |
+| `Up` / `Down` | Oldin yozilgan buyruqlarni koʻrish |
+| `Ctrl+C` | Qatorni tozalash yoki ishlayotgan buyruqni toʻxtatish |
+| Sichqoncha gʻildiragi | Konsolni orqaga aylantirish |
+| `Ctrl+Up` / `Ctrl+Down` | Ekran oʻlchamini kattalashtirish / kichraytirish |
+
+Yozayotganingizda buyruq nomi mavjud boʻlsa **yashil**, bunday boshlanadigan buyruq boʻlmasa **qizil** rangga kiradi.
+
+## 5. Ish stoli
+
+```
+startx
+```
+
+`startx` *System Monitor* oynali kichik grafik ish stolini ochadi. Oynalarni sarlavhasidan tortib suring, oldinga chiqarish uchun ustiga bosing. Shell’ga qaytish uchun **ESC** ni bosing.
+
+## 6. Foydalanuvchilar
+
+```
+whoami            men kimman?
+su guest          guest boʻlish (parol: guest)
+logout            kirish oynasiga qaytish
+passwd            parolingizni oʻzgartirish
+```
+
+<Callout type="note">
+UzOS fayllarini **RAM diskda** saqlaydi. Mashina oʻchirilganda yaratgan hamma narsangiz yoʻqoladi. Chiqish uchun virtual mashina oynasini yoping.
+</Callout>
+
+Endi [barcha buyruqlarni](/uz/docs/commands) koʻrib chiqing yoki [xavfsizlik laboratoriyasini](/uz/docs/security-lab) sinab koʻring.

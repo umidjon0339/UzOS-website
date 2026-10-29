@@ -1,0 +1,80 @@
+# UzOS qanday tuzilgan
+
+Yadro **boshqaruvlarga** boʻlingan: `modules/` ichida har biri uchun bitta papka. Har bir boshqaruv operatsion tizim haqidagi bitta katta savolga javob beradi va ularning hammasi bir xil tartibda tuzilgan.
+
+## UzOS hayoti toʻrt qadamda
+
+1. **GRUB** `kernel.bin` ni xotiraga yuklaydi va `boot/boot.s` ga oʻtadi.
+2. `boot.s` stekni tayyorlaydi va `modules/core/` dagi `kernel_main` ni chaqiradi.
+3. `kernel_main` har bir boshqaruvni tartib bilan ishga tushiradi (buni yuklanish jurnalida koʻrasiz).
+4. **Buyruq qatori (shell)** kirish oynasini koʻrsatadi va sizni kutadi.
+
+## 12 ta boshqaruv
+
+| Boshqaruv | U javob beradigan savol | Holati |
+| --- | --- | --- |
+| `process_management` | Jarayon nima? Jarayonlar jadvali, dasturlar orasida almashish, ELF yuklash, tizim chaqiruvlari, signallar | Tayyor |
+| `memory_management` | Xotira qayerdan keladi? 4 KB li bloklar, sahifalash, yadro xotirasi (heap), `sbrk` / `mmap` | Tayyor |
+| `cpu_management` | Keyingi kim ishlaydi? Ustuvorlik, FIFO / RR, uzoq kutganlarga navbat berish, protsessor vaqtini hisoblash, `perf` | Tayyor |
+| `device_management` | Yadro qurilmalar bilan qanday ishlaydi? Taymer, klaviatura, sichqoncha, soat, ekran, grafika | Tayyor |
+| `io_management` | Fayl deskriptori nima? `open`, `read`, `write`, `close`, `seek` | Tayyor |
+| `filesystem_management` | Fayllar qayerda saqlanadi? Papkalar daraxti, RAM disk, `/proc` | Tayyor |
+| `user_management` | Siz kimsiz? Hisoblar, SHA-256 parollar, tizimga kirish, fayl egalari va ruxsatlar | Tayyor |
+| `security_management` | Kim nima qila oladi va nima urinib koʻrildi? Imtiyozlar, audit jurnali, yadro oʻzgarmaganini tekshirish | Tayyor |
+| `shell` | Buyruq qatori qanday ishlaydi? Buyruqni tahlil qilish, tarix, Tab bilan toʻldirish, ranglar | Tayyor |
+| `ui` | Natija qanday koʻrinishi kerak? Maʼnosiga qarab ranglar, ramkalar, chiziqlar, holat paneli | Tayyor |
+| `network_management` | Kompyuterlar qanday bogʻlanadi? Tarmoq kartasi drayveri, IP, TCP / UDP, soketlar | Rejada |
+| `storage_management` | Fayllar qayta yoqilgandan keyin qanday saqlanib qoladi? Disk drayveri va diskdagi fayl tizimi | Rejada |
+
+## Bitta papka — bitta gʻoya
+
+Har bir boshqaruvda bir xil toʻrtta papka bor:
+
+```
+modules/cpu_management/
+  core/                     yadroning oʻzi chaqiradigan qismlar
+    tsc/  tsc.c  tsc.h
+  commands/                 har bir buyruq uchun bitta papka
+    top/  cmd_top.c  cmd_top.h
+  syscalls/                 har bir tizim chaqiruvi uchun bitta papka
+    getpid/  sys_getpid.c  sys_getpid.h
+  security/                 har bir hujum uchun bitta papka
+    fork_bomb/
+      atk_fork_bomb.c       hujum
+      README.md             hujum haqida hayotiy misol
+      defence/
+        process_quota/
+          def_process_quota.c   uni toʻxtatadigan himoya
+```
+
+| Papka | Ichida nima boʻladi |
+| --- | --- |
+| `core/` | Faqat yadroning oʻzi chaqiradigan qismlar (taymer, rejalashtiruvchi) yoki bitta nusxada boʻlishi kerak boʻlgan maʼlumotlar |
+| `commands/<nom>/` | Bitta buyruq: `cmd_<nom>.c` va uning oʻz sarlavha fayli `cmd_<nom>.h` |
+| `syscalls/<nom>/` | Bitta tizim chaqiruvi: `sys_<nom>.c` va `sys_<nom>.h` |
+| `security/<hujum>/` | Bitta hujum (`atk_<hujum>.c` + `README.md`), uning himoyasi esa `defence/<himoya>/` ichida |
+
+## Nega UzOS’ni oʻrganish oson
+
+- **Hammasi bir joyda.** Buyruq, tizim chaqiruvi, hujum yoki himoyaga kerak boʻlgan hamma narsa uning papkasida. Kichik yordamchi funksiyalar umumiy qilinmay, nusxalab qoʻyilgan — bitta narsani tushunish uchun boshqa joylarga sakrash shart emas.
+- **Tushuntirish kod yonida.** Har bir fayl izoh bilan boshlanadi: u nima qiladi, nimadan *foydalanadi* va nega aynan shunday yozilgan.
+- **Hech narsa yashirin emas.** Har bir `#include` faylning toʻliq yoʻlini va undan nima olinishini koʻrsatadi:
+
+  ```
+  #include "modules/process_management/core/scheduler/scheduler.h"   // scheduler_get_current_process
+  ```
+
+- **Avval buz, keyin tuzat.** Har bir hujum uni toʻxtatadigan himoya bilan yonma-yon turadi. Uni `seclab` bilan ishga tushiring, toʻsilganini koʻring, soʻng ikkala faylni yonma-yon oʻqing.
+
+Demak, `top` qanday ishlashini bilmoqchi boʻlsangiz, `modules/cpu_management/commands/top/` ni oching. Javobning hammasi shu papkada.
+
+## Oʻqishni boshlash uchun yaxshi joylar
+
+- **Sahifalash**: `modules/memory_management/core/vmm/`, soʻng buyruq qatorida `pagewalk 0xB8000` (VGA matn xotirasi) ni sinab koʻring
+- **Dasturlar orasida almashish**: `modules/process_management/core/scheduler/switch_task.s`
+- **Parollar**: `modules/user_management/core/hash/` — SHA-256 qadamma-qadam yozilgan
+- **Tizim chaqiruvi boshidan oxirigacha**: `modules/process_management/syscalls/handler/`
+
+<Callout type="tip">
+Loyiha kodida batafsil `UzOS_Learning_Guide.md` va har bir boshqaruvda uning barcha fayllari roʻyxati yozilgan `README.md` bor.
+</Callout>

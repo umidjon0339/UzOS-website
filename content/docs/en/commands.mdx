@@ -1,0 +1,114 @@
+# Shell commands
+
+UzOS has 83 commands. Many have the same names and output layout as on Linux, so what you learn here also works there. Type `help <command>` inside UzOS for details.
+
+## Shell
+
+| Command | What it does |
+| --- | --- |
+| `help [command]` | What commands there are |
+| `clear` | Empty the screen and the scroll-back |
+| `echo <text>` | Print the text back |
+| `calc <expression>` | Integer calculator, e.g. `calc (2+3)*4` |
+| `color <fg> [bg]` | Change the text colour |
+| `history` | The commands typed so far |
+| `uzfetch` | The flag on the left, the system on the right |
+| `statusbar [on\|off]` | Show or hide the top bar |
+| `snake` | The classic game, in text mode |
+
+## Files
+
+| Command | What it does |
+| --- | --- |
+| `ls [path]` | List a directory, with owners and modes |
+| `cd [path]` | Change directory (no path: go home) |
+| `pwd` | Print the current directory |
+| `cat <path>` | Print a whole file |
+| `touch <path>` | Create an empty file |
+| `write <path> <text>` | Replace a file's content |
+| `mkdir <path>` | Create a directory |
+| `rm <path>` | Delete a file or an empty directory |
+| `cp <from> <to>` | Copy a file |
+| `mv <from> <to>` | Move or rename |
+| `wc <path>` | Count lines, words and bytes |
+| `grep <word> <path>` | Print the lines that contain a word |
+| `hexdump <path> [bytes]` | Show a file byte by byte |
+
+## Users and permissions
+
+| Command | What it does |
+| --- | --- |
+| `whoami` | The user this shell runs as |
+| `id [user]` | A user's uid, name and home directory |
+| `users` | Every account |
+| `su [user]` | Become another user |
+| `logout` | Back to the login prompt |
+| `passwd [user]` | Change a password |
+| `chmod <mode> <path>` | Who may read and write a file |
+| `chown <user> <path>` | Give a file to another user |
+| `useradd <name>` | Create an account (root only) |
+| `userdel <name>` | Remove an account (root only) |
+
+## Processes
+
+| Command | What it does |
+| --- | --- |
+| `ps` | A snapshot of the processes |
+| `exec <file> [&]` | Load an ELF program and run it, e.g. `exec /hello` |
+| `kill <pid>` | Stop a process |
+| `spawn` | Start a background worker process |
+| `sleep <seconds>` | Pause (Ctrl+C ends it early) |
+| `testuser [null\|badptr]` | Run a tiny program in ring 3 |
+
+## CPU and scheduling
+
+| Command | What it does |
+| --- | --- |
+| `top`, `htop`, `btop` | Live views of the CPU and the processes (`q` quits) |
+| `lscpu`, `cpuinfo` | What the CPU is and how it is set up |
+| `nproc`, `getconf` | CPU count and system sizes |
+| `uptime` | Uptime, users and load average |
+| `vmstat`, `mpstat`, `pidstat`, `sar`, `cpustat` | Where the CPU's time went |
+| `nice`, `renice` | Start or change a process with another priority |
+| `chrt` | See and set the scheduling policy (FIFO, RR, ...) |
+| `taskset`, `numactl` | CPU affinity and NUMA placement |
+| `ulimit` | Resource limits |
+| `time <command>` | How long a command took |
+| `perf stat\|record\|report` | Count events and find where the CPU spends its time |
+| `faults` | CPU exceptions and the processes they ended |
+| `cpupower`, `turbostat`, `powerprofilesctl` | Clock speed, idle states, power profile |
+| `systemctl`, `systemd-cgtop` | Services and their resource use |
+| `cpucalls` | Test every CPU system call from ring 3 |
+
+## Memory
+
+| Command | What it does |
+| --- | --- |
+| `meminfo` | Physical RAM used and free |
+| `heapinfo` | Walk the kernel heap |
+| `memtest` | Try `sbrk`, `mmap` and `munmap` |
+| `pagewalk <addr>` | Follow an address through the page tables |
+| `ioinfo [pid]` | A process's open file descriptors |
+
+## Devices and screen
+
+| Command | What it does |
+| --- | --- |
+| `devices` | The hardware and its interrupt counts |
+| `date` | Date and time from the real-time clock |
+| `mode [name]` | List the screen modes, or switch, e.g. `mode 1280x720` |
+| `theme [name]` | List or switch colour themes |
+| `font [uzos\|bios]` | Show or change the console font |
+| `startx` | The graphical desktop (ESC to leave) |
+| `beep [hz]`, `play` | A tone or a melody on the PC speaker |
+
+## Security
+
+| Command | What it does |
+| --- | --- |
+| `seclab` | The security lab, see [Security lab](/en/docs/security-lab) |
+| `audit [sum]` | What the defences refused, and to whom |
+| `caps [user]` | Which privileges a user holds |
+| `integrity` | Is the kernel still the one that booted? |
+
+The files in `/proc` are written by the kernel when you read them: try `cat /proc/cpuinfo`, `cat /proc/stat`, or `cat /proc/<pid>/status` with a PID from `ps`.

@@ -1,0 +1,40 @@
+# VirtualBox’da ishga tushirish
+
+[VirtualBox](https://www.virtualbox.org) — Windows, macOS (Intel) va Linux uchun grafik interfeysli bepul virtual mashina dasturi. Buyruq yozishdan koʻra tugma bosishni afzal koʻrsangiz, undan foydalaning.
+
+## 1. Virtual mashina yarating
+
+1. [Yuklab olish sahifasidan](/uz/download) `UzOS.iso` ni yuklab oling.
+2. VirtualBox’ni oching va **New** (Yangi) tugmasini bosing.
+3. Toʻldiring:
+   - **Name**: `UzOS`
+   - **ISO Image**: yuklab olingan `UzOS.iso` ni tanlang
+   - **Type**: `Other`
+   - **Version**: `Other/Unknown` (32-bit)
+4. Agar VirtualBox *unattended installation* (avtomatik oʻrnatish) taklif qilsa, **Skip Unattended Installation** belgisini qoʻying.
+5. **Memory** (xotira): `128 MB` (koʻproq ham boʻladi). **Processors**: `1`.
+6. **Hard disk**: **Do not add a virtual hard disk** ni tanlang. UzOS toʻliq RAM’dan ishlaydi.
+7. **Finish** ni bosing.
+
+## 2. Ikki sozlamani tekshiring
+
+Yangi mashinani tanlang va **Settings** (Sozlamalar) ni oching:
+
+| Qayerda | Qiymat | Nima uchun |
+| --- | --- | --- |
+| System → Motherboard → **Enable EFI** | **Oʻchiq** | UzOS klassik BIOS bilan yuklanadi |
+| Display → Screen → **Graphics Controller** | **VBoxVGA** | Ish stoli (`startx`) uchun kerak |
+
+## 3. Ishga tushiring
+
+**Start** ni bosing. GRUB 3 soniyadan keyin UzOS’ni ishga tushiradi. `root` sifatida `uzos` paroli bilan kiring.
+
+<Callout type="note">
+Oyna ichiga bosganingizda VirtualBox sichqonchani "ushlab qoladi". Uni boʻshatish uchun **Host key** ni bosing (Windows va Linux’da oʻng `Ctrl`, macOS’da chap `⌘`).
+</Callout>
+
+## Muammolar
+
+- **"No bootable medium found"**: ISO ulanmagan. *Settings → Storage* da boʻsh CD qurilmasini tanlang va `UzOS.iso` ni koʻrsating.
+- **GRUB’dan keyin qora ekran**: *Enable EFI* oʻchiq ekanini tekshiring.
+- **`startx` hech narsa koʻrsatmaydi**: grafik kontrollerni *VBoxVGA* ga oʻzgartiring va mashinani qayta ishga tushiring.

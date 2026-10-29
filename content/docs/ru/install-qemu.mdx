@@ -1,0 +1,73 @@
+# Запуск в QEMU
+
+[QEMU](https://www.qemu.org) — бесплатный эмулятор: он изображает целый компьютер, поэтому UzOS работает в окне и не трогает ваш диск. Это **самый простой и рекомендуемый** способ попробовать UzOS.
+
+## 1. Скачайте UzOS
+
+Возьмите `UzOS.iso` на [странице загрузки](/ru/download) и запомните папку, куда он сохранился.
+
+## 2. Установите QEMU
+
+**Ubuntu / Debian / Linux Mint**
+
+```
+sudo apt install qemu-system-x86
+```
+
+**Fedora**
+
+```
+sudo dnf install qemu-system-x86
+```
+
+**Arch / Manjaro**
+
+```
+sudo pacman -S qemu-system-x86
+```
+
+**macOS** (через [Homebrew](https://brew.sh))
+
+```
+brew install qemu
+```
+
+**Windows**
+
+Скачайте установщик с [qemu.org/download](https://www.qemu.org/download/#windows) и запустите его. Затем добавьте папку QEMU (обычно `C:\Program Files\qemu`) в `PATH` или выполняйте команды ниже из этой папки.
+
+## 3. Запустите UzOS
+
+Откройте терминал в папке с ISO и выполните:
+
+```
+qemu-system-i386 -cdrom UzOS.iso -m 128
+```
+
+Откроется окно, GRUB через 3 секунды запустит UzOS, и вы увидите приглашение входа. Войдите как `root` с паролем `uzos`. Что делать дальше — на странице [Первый запуск](/ru/docs/getting-started).
+
+## Полезные параметры
+
+```
+qemu-system-i386 -cdrom UzOS.iso -m 128 -rtc base=localtime -display gtk,zoom-to-fit=on
+```
+
+| Параметр | Значение |
+| --- | --- |
+| `-cdrom UzOS.iso` | Загрузиться с ISO, как с компакт-диска |
+| `-m 128` | Дать машине 128 МБ RAM |
+| `-rtc base=localtime` | Часы показывают местное время, а не UTC |
+| `-display gtk,zoom-to-fit=on` | При изменении размера окна картинка растягивается (Linux) |
+
+## Мышь и клавиатура
+
+Щёлкните внутри окна, чтобы пользоваться мышью в UzOS. Чтобы вернуть мышь, нажмите **Ctrl+Alt+G**.
+
+## Проблемы
+
+<Callout type="warning">
+**`command not found: qemu-system-i386`**: QEMU не установлен или его нет в `PATH`. В Linux установите пакет выше; в Windows укажите полный путь, например `"C:\Program Files\qemu\qemu-system-i386.exe"`.
+</Callout>
+
+- **Окно несколько секунд остаётся чёрным**: это ждёт GRUB. Нажмите Enter, чтобы начать сразу.
+- **Очень медленно**: закройте другие тяжёлые программы. В Linux можно добавить `-accel kvm`, чтобы использовать аппаратную виртуализацию.

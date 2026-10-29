@@ -1,0 +1,52 @@
+# Security lab
+
+UzOS comes with **70 attacks**, each paired with the **defence** that stops it. You can read about an attack, simulate it safely, run it for real, and see the defence refuse it in the audit log.
+
+## The seclab command
+
+```
+seclab list                  every attack and its defence
+seclab info <attack>         what it does and what stops it
+seclab attack <id>           simulate: read-only, always safe
+seclab attack <id> live      really run it (small and bounded, root only)
+seclab defence <id>          show a defence
+seclab verify <id> | all     run the defences' self-tests
+seclab log                   the newest refusals first
+seclab status                counters, watchdog, free process slots
+seclab repair                let every attack undo itself (root only)
+```
+
+## Try it: a fork bomb
+
+A *fork bomb* creates processes in a loop until no slots are left for anyone. Its defence, `slot_quota`, limits how many processes one user can have.
+
+```
+seclab info fork_bomb        read about it
+seclab attack fork_bomb      simulate it (nothing really happens)
+seclab attack fork_bomb live really run it, as root
+audit                        see what slot_quota refused
+seclab status                the process table is still usable
+```
+
+A live run is reported as **BLOCKED** when the attack's own defence refused it. That proves this defence works.
+
+## Another one: patching the kernel
+
+`kernel_patch` writes a single byte into the kernel's code. The `integrity_check` defence keeps a SHA-256 of the kernel from boot time, and `exec` refuses to start programs on a patched kernel.
+
+```
+integrity                    is the kernel still the one that booted?
+seclab info kernel_patch
+```
+
+## How the protection works
+
+- **Capabilities**: root's power is split into named privileges such as `CAP_KILL`, `CAP_SETUID` and `CAP_SECLAB`. Each check asks for exactly one. Try `caps` and `caps guest`.
+- **Audit log**: every refusal is recorded with the time, the user and the PID. Nobody can clear it. Try `audit` and `audit sum`.
+- **Kernel integrity**: a SHA-256 hash of the kernel's code and constants, measured at boot.
+
+<Callout type="note">
+Live attacks are small and bounded, and `seclab repair` undoes them. Some attacks that a 32-bit virtual machine cannot really perform are shown as honest illustrations instead.
+</Callout>
+
+Each attack has a `README.md` in its folder, for example `modules/process_management/security/fork_bomb/`, explaining the real-world attack and the defence.
